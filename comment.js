@@ -258,10 +258,10 @@ async function getcomment() {
   //document.querySelector('#TextInputField').value;
   document.querySelector('#TextInputField').value = " ";
 
-const randomid = Math.floor(Math.random() * 100000);
+  const randomid = Math.floor(Math.random() * 100000);
 
   const newlist =
-  `<div id="${randomid}">` +
+    `<div id="${randomid}">` +
     "<div class='d-flex flex-row align-items-center commented-user' >" +
     "<h5 class='mr-2' id='username'>" +
     username + "</h5>" +
@@ -344,36 +344,36 @@ async function getreplycomment(e, docRef) {
     // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
     $("#replycommentpost").removeAttr('style');
 
-     cardbodycomment.innerHTML = textinput;
-     cardtitleDate.innerHTML = datetime;
-     cardtitle.innerHTML = username;
+    cardbodycomment.innerHTML = textinput;
+    cardtitleDate.innerHTML = datetime;
+    cardtitle.innerHTML = username;
 
     const replyDiv = document.getElementById(`ReplyDiv-${buttonid}`);
     replyDiv.appendChild(cardtitle);
     replyDiv.appendChild(cardtitleDate);
     replyDiv.appendChild(cardbody);
 
-    const reply = {User: username, Date: datetime, Comment: textinput};
+    const reply = { User: username, Date: datetime, Comment: textinput };
 
     // set data
     const docSnap = await getDoc(docRef);
     const replies = docSnap.data().replies;
     if (replies) {
       replies.push(reply);
-      await updateDoc(docRef, { 
+      await updateDoc(docRef, {
         replies: replies
       });
     } else {
-      await updateDoc(docRef, { 
+      await updateDoc(docRef, {
         replies: [reply]
       });
     }
-    
+
 
     document.querySelector(`#TextInputFieldUserPost-${buttonid}`).value = " ";
     console.log("work!")
 
-  
+
   }
 };
 all()
@@ -381,59 +381,60 @@ async function all() {
   const randomid = Math.floor(Math.random() * 100000);
 
   const buttonid = $("#buttonreply").attr("data-id")
-  console.log(buttonid);
+  //console.log(buttonid);
   const ref = doc(firestoreDB, "Comments", "quTbzWDZnMWtgpzJizpi")
   const docSnap = await getDoc(ref);
 
-    const city = docSnap.data();
-    console.log(city);
-  const datetime =formatDate(new Date(city.datetime.seconds*1000)); //new Date(city.datetime.seconds*1000)
-    const newlist =
+  const city = docSnap.data();
+  console.log(city);
+  const datetime = formatDate(new Date(city.datetime.seconds * 1000)); //new Date(city.datetime.seconds*1000)
+  const newlist =
     `<div id="${randomid}">` +
-      "<div class='d-flex flex-row align-items-center commented-user' >" +
-      "<h5 class='mr-2' id='username'>" +
-      city.username + "</h5>" +
-      "<p id='datetimeshow'>" +
-      datetime+ "</p>" +
-      "</div>" +
-      "<div class='comment-text-sm' id='Comment Sentence'>" + city.comment + "</div>" +
-      "<div class='reply-section' >" +
-      "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
-      `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
-      "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply'  >" +
-      `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
-      "</div>" +
-      "</div>" +
-      "</div>" +
-      "</div>";
-    $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
+    "<div class='d-flex flex-row align-items-center commented-user' >" +
+    "<h5 class='mr-2' id='username'>" +
+    city.username + "</h5>" +
+    "<p id='datetimeshow'>" +
+    datetime + "</p>" +
+    "</div>" +
+    "<div class='comment-text-sm' id='Comment Sentence'>" + city.comment + "</div>" +
+    "<div class='reply-section' >" +
+    "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
+    `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
+    "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply'  >" +
+    `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    "</div>";
+  $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
 
-    var card = document.createElement("div");
-    card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
-    card.setAttribute("id", "replycommentpost");
-    card.setAttribute("style", "margin-left: 13px;");
+  var card = document.createElement("div");
+  card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
+  card.setAttribute("id", "replycommentpost");
+  card.setAttribute("style", "margin-left: 13px;");
   //  document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
 
-    var cardtitle = document.createElement("h5");
-    cardtitle.setAttribute("class", "mr-2");
-    cardtitle.setAttribute("id", "ReplyUsername");
-    card.appendChild(cardtitle);
-    var cardtitleDate = document.createElement("p");
-    cardtitleDate.setAttribute("id", "Replydatetimeshow");
-    card.appendChild(cardtitleDate);
+  var cardtitle = document.createElement("h5");
+  cardtitle.setAttribute("class", "mr-2");
+  cardtitle.setAttribute("id", "ReplyUsername");
+  card.appendChild(cardtitle);
+  var cardtitleDate = document.createElement("p");
+  cardtitleDate.setAttribute("id", "Replydatetimeshow");
+  card.appendChild(cardtitleDate);
 
-    var cardbody = document.createElement("div");
-    cardbody.setAttribute("class", "comment-text-sm");
-    cardbody.setAttribute("id", "ReplyCommentShow");
-    var cardbodycomment = document.createElement("p");
-    cardbodycomment.setAttribute("id", "postcomment");
-    cardbody.appendChild(cardbodycomment);
-    // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
-    //$("#replycommentpost").removeAttr('style');
+  var cardbody = document.createElement("div");
+  cardbody.setAttribute("class", "comment-text-sm");
+  cardbody.setAttribute("id", "ReplyCommentShow");
+  var cardbodycomment = document.createElement("p");
+  cardbodycomment.setAttribute("id", "postcomment");
+  cardbody.appendChild(cardbodycomment);
+  // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
+  //$("#replycommentpost").removeAttr('style');
 
-    $("#ReplyCommentShow").innerHTML = city.replies[0].Comment;
-    $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
-    $("#ReplyUsername").innerHTML = city.replies[0].User;;
+  $("#ReplyCommentShow").innerHTML =
+    console.log(city.replies[0].Comment);
+  $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
+  $("#ReplyUsername").innerHTML = city.replies[0].User;;
   console.log("wdsd")
 
 }
