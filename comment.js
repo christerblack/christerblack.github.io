@@ -434,7 +434,6 @@ async function all() {
   $("#postcomment").innerHTML = city.replies[0].Comment;
   $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
   $("#ReplyUsername").innerHTML = city.replies[0].User;
-
   console.log(city.replies[0].User,city.replies[0].Comment)
 
 }
