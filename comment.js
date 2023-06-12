@@ -408,6 +408,11 @@ async function all() {
       "</div>";
     $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
     
+    const replyDiv = document.createElement('div');
+    replyDiv.id = `ReplyDiv-${randomid}`;
+    replyDiv.style = "margin-left: 15%";
+    $(`#${randomid}`)[0].appendChild(replyDiv);
+
     var card = document.createElement("div");
     card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
     card.setAttribute("id", "replycommentpost");
@@ -435,12 +440,10 @@ async function all() {
      cardtitleDate.innerHTML = city.replies[0].Date;
      cardtitle.innerHTML = city.replies[0].Date;;
 
-    const replyDiv = document.getElementById(`ReplyDiv-${buttonid}`);
-    replyDiv.appendChild(cardtitle);
-    replyDiv.appendChild(cardtitleDate);
-    replyDiv.appendChild(cardbody);
-
-
+    const replyDiv1 = document.getElementById(`ReplyDiv-${buttonid}`);
+    replyDiv1.appendChild(cardtitle);
+    replyDiv1.appendChild(cardtitleDate);
+    replyDiv1.appendChild(cardbody);
 
 }
 
