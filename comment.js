@@ -455,8 +455,6 @@ async function all() {
 }
 
 
-
-
 // Create Data
 async function createFirestoreData(textid, targetText, comment, username, useruid) {
   console.log(textid, comment, username, useruid)
