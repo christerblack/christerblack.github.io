@@ -299,7 +299,7 @@ async function getcomment() {
 //document.getElementById("buttonreply")?.addEventListener("click", replyspanhtml(e));
 function replyspanhtml(e) {
   console.log(e);
-  const buttonid = $("#buttonreply").attr("data-id")
+  const buttonid = $(e).DATAATTR('data-id');
   console.log(buttonid);
   $(`#replyandreply-${buttonid}`).removeAttr('style');
   $('#TextInputFieldUserPost').data('data-id', buttonid); //setter
