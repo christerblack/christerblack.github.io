@@ -344,9 +344,9 @@ async function getreplycomment(e, docRef) {
     // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
     $("#replycommentpost").removeAttr('style');
 
-    // cardbodycomment.innerHTML = textinput;
-    // cardtitleDate.innerHTML = datetime;
-    // cardtitle.innerHTML = username;
+     cardbodycomment.innerHTML = textinput;
+     cardtitleDate.innerHTML = datetime;
+     cardtitle.innerHTML = username;
 
     const replyDiv = document.getElementById(`ReplyDiv-${buttonid}`);
     replyDiv.appendChild(cardtitle);
