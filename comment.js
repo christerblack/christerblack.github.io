@@ -407,11 +407,6 @@ async function all() {
       "</div>" +
       "</div>";
     $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
-    
-    const replyDiv = document.createElement('div');
-    replyDiv.id = `ReplyDiv-${randomid}`;
-    replyDiv.style = "margin-left: 15%";
-    $(`#${randomid}`)[0].appendChild(replyDiv);
 
     var card = document.createElement("div");
     card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
@@ -434,16 +429,12 @@ async function all() {
     cardbodycomment.setAttribute("id", "postcomment");
     cardbody.appendChild(cardbodycomment);
     // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
-    $("#replycommentpost").removeAttr('style');
+    //$("#replycommentpost").removeAttr('style');
 
      cardbodycomment.innerHTML = city.replies[0].Comment;
      cardtitleDate.innerHTML = city.replies[0].Date;
      cardtitle.innerHTML = city.replies[0].Date;;
 
-    const replyDiv1 = document.getElementById(`ReplyDiv-${buttonid}`);
-    replyDiv1.appendChild(cardtitle);
-    replyDiv1.appendChild(cardtitleDate);
-    replyDiv1.appendChild(cardbody);
 
 }
 
