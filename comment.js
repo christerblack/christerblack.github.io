@@ -400,7 +400,7 @@ async function all() {
       "<div class='reply-section' >" +
       "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
       `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
-      "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply' style='visibility:hidden' >" +
+      "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply'  >" +
       `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
       "</div>" +
       "</div>" +
@@ -408,7 +408,6 @@ async function all() {
       "</div>";
     $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
     
-
     var card = document.createElement("div");
     card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
     card.setAttribute("id", "replycommentpost");
