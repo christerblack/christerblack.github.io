@@ -400,7 +400,7 @@ async function all() {
     "<div class='comment-text-sm' id='Comment Sentence'>" + city.comment + "</div>" +
     `<div class='reply-section' id='reply-section-${randomid}'> `+
     "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
-    `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
+    `<button class="btn btn-primary" id="buttonreply${randomid}" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
     "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply' style='visibility:hidden'   >" +
     `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
     "</div>" +
