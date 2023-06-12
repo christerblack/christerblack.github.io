@@ -428,8 +428,7 @@ async function all() {
   var cardbodycomment = document.createElement("p");
   cardbodycomment.setAttribute("id", "postcomment");
   cardbody.appendChild(cardbodycomment);
-  
-  // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
+   // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
   //$("#replycommentpost").removeAttr('style');
 
   $("#postcomment").innerHTML = city.replies[0].Comment;
@@ -452,7 +451,6 @@ async function all() {
   "</div>" +
   "</div>";
   $(".reply-section")[0].insertAdjacentHTML("afterend", newreplylist);
-
 
 }
 
