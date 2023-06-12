@@ -325,7 +325,7 @@ async function getreplycomment(e, docRef) {
     card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
     card.setAttribute("id", "replycommentpost");
     card.setAttribute("style", "margin-left: 13px;");
-    //document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
+    document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
 
     var cardtitle = document.createElement("h5");
     cardtitle.setAttribute("class", "mr-2");
@@ -341,7 +341,7 @@ async function getreplycomment(e, docRef) {
     var cardbodycomment = document.createElement("p");
     cardbodycomment.setAttribute("id", "postcomment");
     cardbody.appendChild(cardbodycomment);
-    // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
+    document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
     $("#replycommentpost").removeAttr('style');
 
     cardbodycomment.innerHTML = textinput;
@@ -397,10 +397,10 @@ async function all() {
     datetime + "</p>" +
     "</div>" +
     "<div class='comment-text-sm' id='Comment Sentence'>" + city.comment + "</div>" +
-    "<div class='reply-section' >" +
+    `<div class='reply-section' id='reply-section-${randomid}'> `+
     "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
     `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
-    "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply'  >" +
+    "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply' style='visibility:hidden'   >" +
     `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
     "</div>" +
     "</div>" +
@@ -428,6 +428,7 @@ async function all() {
   var cardbodycomment = document.createElement("p");
   cardbodycomment.setAttribute("id", "postcomment");
   cardbody.appendChild(cardbodycomment);
+  
   // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
   //$("#replycommentpost").removeAttr('style');
 
@@ -435,6 +436,23 @@ async function all() {
   $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
   $("#ReplyUsername").innerHTML = city.replies[0].User;
   console.log(city.replies[0].User,city.replies[0].Comment)
+  
+  const newreplylist =
+  `<div id="ReplyDiv-${randomid}" style="margin-left: 15%"; >` +
+  "<div class='d-flex flex-row align-items-center commented-user' >" +
+  "<h5 class='mr-2' id='username'>" +
+  city.replies[0].User + "</h5>" +
+  "<p id='datetimeshow'>" +
+  city.replies[0].Date + "</p>" +
+  "</div>" +
+  "<div class='comment-text-sm' id='Comment Sentence'>" + city.replies[0].Comment + "</div>" +
+  "<div class='reply-section' >" +
+  "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
+  "</div>" +
+  "</div>" +
+  "</div>";
+  $(".reply-section")[0].insertAdjacentHTML("afterend", newreplylist);
+
 
 }
 
