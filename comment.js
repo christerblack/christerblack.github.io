@@ -431,8 +431,7 @@ async function all() {
   // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
   //$("#replycommentpost").removeAttr('style');
 
-  $("#ReplyCommentShow").innerHTML =
-    console.log(city.replies[0].Comment);
+  $("#postcomment").innerHTML = city.replies[0].Comment;
   $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
   $("#ReplyUsername").innerHTML = city.replies[0].User;;
   console.log("wdsd")
