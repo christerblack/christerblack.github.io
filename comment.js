@@ -325,7 +325,7 @@ async function getreplycomment(e, docRef) {
     card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
     card.setAttribute("id", "replycommentpost");
     card.setAttribute("style", "margin-left: 13px;");
-    document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
+    //document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
 
     var cardtitle = document.createElement("h5");
     cardtitle.setAttribute("class", "mr-2");
@@ -412,7 +412,7 @@ async function all() {
   card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
   card.setAttribute("id", "replycommentpost");
   card.setAttribute("style", "margin-left: 13px;");
-  //  document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
+  //document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
 
   var cardtitle = document.createElement("h5");
   cardtitle.setAttribute("class", "mr-2");
