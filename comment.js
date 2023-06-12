@@ -499,10 +499,7 @@ async function readUserData(uid) {
     videotimestamp.innerHTML = "Collocations exist on video " + videoEP + " time is: " + videotime;
     card.appendChild(videotimestamp);
 
-    // card.addEventListener("click", () => {
-    //   window.location.assign("Comments.html" + "?targetTextId=" + doc.id);
-    // });
-    // card.classList.add("text");
+    
   });
 }
 
