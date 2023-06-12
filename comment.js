@@ -271,7 +271,7 @@ async function getcomment() {
     "<div class='comment-text-sm' id='Comment Sentence'>" + textinput + "</div>" +
     "<div class='reply-section' >" +
     "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
-    `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
+    `<button class="btn btn-primary" id="buttonreply"${randomid}"" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
     `<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply-${randomid}' style='visibility:hidden' >` +
     `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
     "</div>" +
@@ -299,6 +299,7 @@ async function getcomment() {
 //document.getElementById("buttonreply")?.addEventListener("click", replyspanhtml(e));
 function replyspanhtml(e) {
   console.log(e);
+  console.log(e.attr('data-id'));
   const buttonid = $(e).attr('data-id');
   console.log(buttonid);
   $(`#replyandreply-${buttonid}`).removeAttr('style');
