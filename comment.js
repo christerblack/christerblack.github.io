@@ -431,10 +431,10 @@ async function all() {
     // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
     //$("#replycommentpost").removeAttr('style');
 
-     cardbodycomment.innerHTML = city.replies[0].Comment;
-     cardtitleDate.innerHTML = city.replies[0].Date;
-     cardtitle.innerHTML = city.replies[0].Date;;
-
+    $("#ReplyCommentShow").innerHTML = city.replies[0].Comment;
+    $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
+    $("#ReplyUsername").innerHTML = city.replies[0].User;;
+  console.log("wdsd")
 
 }
 
