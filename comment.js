@@ -272,7 +272,7 @@ const randomid = Math.floor(Math.random() * 100000);
     "<div class='reply-section' >" +
     "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
     `<button class="btn btn-primary" id="buttonreply" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
-    "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply' style='visibility:hidden' >" +
+    `<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply-${randomid}' style='visibility:hidden' >` +
     `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
     "</div>" +
     "</div>" +
@@ -301,7 +301,7 @@ function replyspanhtml(e) {
   console.log(e);
   const buttonid = $("#buttonreply").attr("data-id")
   console.log(buttonid);
-  $("#replyandreply").removeAttr('style');
+  $(`#replyandreply-${buttonid}`).removeAttr('style');
   $('#TextInputFieldUserPost').data('data-id', buttonid); //setter
 
   console.log("work!")
@@ -408,6 +408,40 @@ async function all() {
       "</div>";
     $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
     
+
+    var card = document.createElement("div");
+    card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
+    card.setAttribute("id", "replycommentpost");
+    card.setAttribute("style", "margin-left: 13px;");
+    document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
+
+    var cardtitle = document.createElement("h5");
+    cardtitle.setAttribute("class", "mr-2");
+    cardtitle.setAttribute("id", "ReplyUsername");
+    card.appendChild(cardtitle);
+    var cardtitleDate = document.createElement("p");
+    cardtitleDate.setAttribute("id", "Replydatetimeshow");
+    card.appendChild(cardtitleDate);
+
+    var cardbody = document.createElement("div");
+    cardbody.setAttribute("class", "comment-text-sm");
+    cardbody.setAttribute("id", "ReplyCommentShow");
+    var cardbodycomment = document.createElement("p");
+    cardbodycomment.setAttribute("id", "postcomment");
+    cardbody.appendChild(cardbodycomment);
+    // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
+    $("#replycommentpost").removeAttr('style');
+
+     cardbodycomment.innerHTML = city.replies[0].Comment;
+     cardtitleDate.innerHTML = city.replies[0].Date;
+     cardtitle.innerHTML = city.replies[0].Date;;
+
+    const replyDiv = document.getElementById(`ReplyDiv-${buttonid}`);
+    replyDiv.appendChild(cardtitle);
+    replyDiv.appendChild(cardtitleDate);
+    replyDiv.appendChild(cardbody);
+
+
 
 }
 
