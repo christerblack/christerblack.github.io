@@ -299,7 +299,7 @@ async function getcomment() {
 //document.getElementById("buttonreply")?.addEventListener("click", replyspanhtml(e));
 function replyspanhtml(e) {
   console.log(e);
-  console.log(e.attr('data-id'));
+  console.log(e.getAttribute('data-id'));
   const buttonid = $(e).attr('data-id');
   console.log(buttonid);
   $(`#replyandreply-${buttonid}`).removeAttr('style');
@@ -401,7 +401,7 @@ async function all() {
     `<div class='reply-section' id='reply-section-${randomid}'> `+
     "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
     `<button class="btn btn-primary" id="buttonreply${randomid}" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
-    "<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply' style='visibility:hidden'   >" +
+    `<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply-${randomid}' style='visibility:hidden'  >` +
     `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
     "</div>" +
     "</div>" +
@@ -409,6 +409,9 @@ async function all() {
     "</div>";
   $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
 
+  for (const [key, val] of Object.entries(object)) {
+    console.log(object[key].userName);
+  } 
   var card = document.createElement("div");
   card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
   card.setAttribute("id", "replycommentpost");
@@ -429,8 +432,8 @@ async function all() {
   var cardbodycomment = document.createElement("p");
   cardbodycomment.setAttribute("id", "postcomment");
   cardbody.appendChild(cardbodycomment);
-   // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
-  //$("#replycommentpost").removeAttr('style');
+  // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
+  // $("#replycommentpost").removeAttr('style');
 
   $("#postcomment").innerHTML = city.replies[0].Comment;
   $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
