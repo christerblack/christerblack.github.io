@@ -61,9 +61,9 @@ export function readFirebaseStorage(data_video) {
 
             // Or inserted into an <img> element
             const video = document.getElementById("video1");
-
-            video.setAttribute("src", url);
             console.log(url)
+            video.setAttribute("src", url);
+    
 
 
         })
