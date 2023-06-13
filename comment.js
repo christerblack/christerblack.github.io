@@ -377,18 +377,22 @@ async function getreplycomment(e, docRef) {
 
   }
 };
-all()
-async function all() {
+all(str)
+async function all(str) {
+  console.log(str);
   const randomid = Math.floor(Math.random() * 100000);
 
   const buttonid = $("#buttonreply").attr("data-id")
-  //console.log(buttonid);
-  const ref = doc(firestoreDB, "Comments", "quTbzWDZnMWtgpzJizpi")
-  const docSnap = await getDoc(ref);
 
-  const city = docSnap.data();
+  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str)); 
+
+  const querySnapshot = await getDocs(ref);
+
+  querySnapshot.forEach((doc) => {
+ 
+  const city = doc.data();
   console.log(city);
-  const datetime = formatDate(new Date(city.datetime.seconds * 1000)); //new Date(city.datetime.seconds*1000)
+  const datetime = formatDate(new Date(city.datetime.seconds * 1000)); 
   const newlist =
     `<div id="${randomid}">` +
     "<div class='d-flex flex-row align-items-center commented-user' >" +
@@ -409,9 +413,6 @@ async function all() {
     "</div>";
   $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
 
-  for (const [key, val] of Object.entries(object)) {
-    console.log(object[key].userName);
-  } 
   var card = document.createElement("div");
   card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
   card.setAttribute("id", "replycommentpost");
@@ -438,24 +439,27 @@ async function all() {
   $("#postcomment").innerHTML = city.replies[0].Comment;
   $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
   $("#ReplyUsername").innerHTML = city.replies[0].User;
-  console.log(city.replies[0].User,city.replies[0].Comment)
-  
-  const newreplylist =
-  `<div id="ReplyDiv-${randomid}" style="margin-left: 15%"; >` +
-  "<div class='d-flex flex-row align-items-center commented-user' >" +
-  "<h5 class='mr-2' id='username'>" +
-  city.replies[0].User + "</h5>" +
-  "<p id='datetimeshow'>" +
-  city.replies[0].Date + "</p>" +
-  "</div>" +
-  "<div class='comment-text-sm' id='Comment Sentence'>" + city.replies[0].Comment + "</div>" +
-  "<div class='reply-section' >" +
-  "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
-  "</div>" +
-  "</div>" +
-  "</div>";
-  $(".reply-section")[0].insertAdjacentHTML("afterend", newreplylist);
 
+  for(var key in city.replies){
+   //console.log(city.replies[key].User+', '+ city.replies[key].Date+', '+ city.replies[key].Comment);
+   const newreplylist =
+   `<div id="ReplyDiv-${randomid}" style="margin-left: 15%"; >` +
+   "<div class='d-flex flex-row align-items-center commented-user' >" +
+   "<h5 class='mr-2' id='username'>" +
+   city.replies[key].User + "</h5>" +
+   "<p id='datetimeshow'>" +
+   city.replies[key].Date + "</p>" +
+   "</div>" +
+   "<div class='comment-text-sm' id='Comment Sentence'>" + city.replies[key].Comment + "</div>" +
+   "<div class='reply-section' >" +
+   "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
+   "</div>" +
+   "</div>" +
+   "</div>";
+   $(".reply-section")[0].insertAdjacentHTML("afterend", newreplylist);
+ 
+  }
+});
 }
 
 
@@ -503,7 +507,6 @@ async function readUserData(uid) {
     videotimestamp.innerHTML = "Collocations exist on video " + videoEP + " time is: " + videotime;
     card.appendChild(videotimestamp);
 
-    
   });
 }
 
