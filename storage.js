@@ -21,21 +21,11 @@ function loadVideoandsrt(e) {
     
     }
 
-    readFirebaseStorage(data_video);
+    readFirebaseStorage(videoID);
 }
 
-export function readFirebaseStorage(data_video) {
-    videoID = `${data_video}`;
-
-    var videoID
-    if (videoID == "undefined") {
-        videoID = "1_1.mp4";
-        //console.log("Please choose a video to play");
-
-    } else {
-        videoID = `${data_video}`;
-
-    }
+export function readFirebaseStorage(videoID) {
+    console.log(videoID)
     //if (auth.currentUser.uid) {
     // Create a storage reference from our storage service
     getDownloadURL(ref(storage, videoID))
