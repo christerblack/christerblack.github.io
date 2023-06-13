@@ -25,7 +25,7 @@ function loadVideoandsrt(e) {
 }
 
 export function readFirebaseStorage(videoID) {
-    console.log(videoID)
+    //console.log(videoID)
     //if (auth.currentUser.uid) {
     // Create a storage reference from our storage service
     getDownloadURL(ref(storage, videoID))
