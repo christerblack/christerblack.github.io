@@ -48,7 +48,9 @@ async function createFirestoreData(target_text) {
     timestamp: new Date().getTime(),
     datetime: new Date(),
     videotimestamp: timestampvideo,
-    video: videoEP
+    video: videoEP,
+    like: 0,
+    dislike: 0,
   });
   console.log("create success");
 }
