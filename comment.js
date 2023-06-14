@@ -16,10 +16,9 @@ filterFirestoreDataUser(str);
 
 export async function filterFirestoreDataUser(str) {
   const textid = str;
-  //const userna = username;
-  //const displayna = displayname;
+
   const citiesRef = collection(firestoreDB, "TargetText");
-  // const qCondition = query(citiesRef, where(doc(), "==", textid));
+ 
   const querySnapshot = await getDoc(doc(firestoreDB, "TargetText", `${textid}`));
 
   if (querySnapshot.exists()) {
@@ -30,8 +29,6 @@ export async function filterFirestoreDataUser(str) {
   }
 
   // clear
-  //  document.querySelector("#containerdis").innerHTML = "";
-
   const username = querySnapshot.data().name;
   const target = querySnapshot.data().targetText;
   const example = querySnapshot.data().ExampleSentence;
@@ -39,7 +36,7 @@ export async function filterFirestoreDataUser(str) {
   const like = querySnapshot.data().like;
   const dislike = querySnapshot.data().dislike;
 
- 
+
   document.querySelector("#username").innerHTML += username;
   document.querySelector("#targertext").innerHTML += target;
   document.querySelector("#examplesentence").innerHTML += example;
@@ -74,13 +71,10 @@ function liked(event) {
   }
 
   console.log('the button ' + 'like' + ' was pressed' + like);
-  //$('likes').css({backgroundColor: "yellow"});
-  //$("#myParagraph").css({"backgroundColor": "black", "color": "white"});
+
   updateFirestoreDatalike(str, like)
   realtimeupdatelike(str, like)
 
-  //realtimeupdate(str)
-  //document.getElementById("counterlike").innerText = like;
 }
 
 // handle dislike
@@ -102,13 +96,13 @@ function disliked(event) {
       dislike_flag = false;
     }
   }
-  // ++counter1;
+
   console.log('the button ' + 'dislike' + ' was pressed' + dislike);
   realtimeupdatedislike(str, dislike)
   updateFirestoreDatadislike(str, dislike)
 
   document.getElementById('counterdislike').innerText = dislike;
-  //realtimeupdate(str)
+
 }
 
 
@@ -116,9 +110,6 @@ function disliked(event) {
 export async function updateFirestoreDatalike(str, count) {
   const textid = str;
   const count1 = count;
-  var DATAATTR = document.getElementById("counterlike").innerText;
-  // var a = $('#counterlike').innerText; //getter
-  console.log(Number(DATAATTR), Number(count1));
 
   const docRef = doc(firestoreDB, "TargetText", textid);
 
@@ -136,9 +127,6 @@ export async function updateFirestoreDatalike(str, count) {
 export async function updateFirestoreDatadislike(str, count1) {
   const textid = str;
   const aaa = count1;
-  //console.log(textid)
-  var DATAATTR = document.getElementById("counterdislike").innerText;
-  //console.log(Number(DATAATTR),Number(count1));
 
   const docRef = doc(firestoreDB, "TargetText", textid);
 
@@ -163,7 +151,7 @@ export async function realtimeupdatelike(str, count) {
     const totallike = Number(Number(like) + Number(countlike))
     console.log("Total like: " + totallike)
 
-    //const dislike = doc.data().dislike
+
     document.getElementById('counterlike').innerText = like;
   });
 
@@ -179,8 +167,7 @@ export async function realtimeupdatedislike(str, count1) {
   onSnapshot(doc(firestoreDB, "TargetText", textid), (doc) => {
     console.log("Current data: ", doc.data().like, doc.data().dislike);
     const dislike = doc.data().dislike
-    //const totalDislike = Number(Number(dislike) + Number(dislikecount))
-    //console.log("Total dislike: " +totalDislike)
+
 
     document.getElementById('counterdislike').innerText = dislike;
   });
@@ -221,9 +208,7 @@ async function getcomment() {
   const username = JSON.parse(user).displayName;
 
   const datetime = formatDate(new Date());
-  //document.querySelector('.comment-text-sm').innerHTML = textinput;
 
-  //document.querySelector('#TextInputField').value;
   document.querySelector('#TextInputField').value = " ";
 
   const randomid = Math.floor(Math.random() * 100000);
@@ -277,14 +262,13 @@ function replyspanhtml(e) {
 
 // reply comment of user comment 
 async function getreplycomment(e, docRef) {
-  console.log(e,e.target.dataset.id)
+  console.log(docRef)
+  console.log(e, e.target.dataset.id)
   let buttonid1 = e.target.dataset.id;
-  console.log(typeof(buttonid1));
+  console.log(typeof (buttonid1));
   $('#TextInputFieldUserPost').data('data-id', buttonid1); //setter
   console.log(e.keyCode);
   if (e.keyCode === 13) {
-    console.log(e.key, "work")
-    // when i click one time it span a class one time but information not access to it
     const textinput = document.querySelector(`#TextInputFieldUserPost-${buttonid1}`).value;
     const user = localStorage.getItem("googleUser");
     const username = JSON.parse(user).displayName;
@@ -327,7 +311,7 @@ async function getreplycomment(e, docRef) {
     // set data
     const docSnap = await getDoc(docRef);
     const replies = docSnap.data().replies;
-    const buttonid = buttonid1;
+
     if (replies) {
       replies.push(reply);
       await updateDoc(docRef, {
@@ -346,89 +330,141 @@ async function getreplycomment(e, docRef) {
 };
 all(str)
 async function all(str) {
-  console.log(str);
-  
+
+
   const buttonid = $("#buttonreply").attr("data-id")
-  
-  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str)); 
-  
+
+  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str));
+
   const querySnapshot = await getDocs(ref);
-  
+
   querySnapshot.forEach((doc) => {
-  const randomid = Math.floor(Math.random() * 100000);
- 
-  const city = doc.data();
-  console.log(city);
-  const datetime = formatDate(new Date(city.datetime.seconds * 1000)); 
-  const newlist =
-    `<div id="${randomid}">` +
+   
+    const randomid = Math.floor(Math.random() * 100000);
+    const city = doc.data();
+    
+    const datetime = formatDate(new Date(city.datetime.seconds * 1000));
+    const newlist =
+      `<div id="${randomid}">` +
+      "<div class='d-flex flex-row align-items-center commented-user' >" +
+      "<h5 class='mr-2' id='username'>" +
+      city.username + "</h5>" +
+      "<p id='datetimeshow'>" +
+      datetime + "</p>" +
+      "</div>" +
+      "<div class='comment-text-sm' id='Comment Sentence'>" + city.comment + "</div>" +
+      `<div class='reply-section' id='reply-section-${randomid}'> ` +
+      "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
+      `<button class="btn btn-primary" id="buttonreply-${randomid}" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
+      `<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply-${randomid}' style='visibility:hidden'  >` +
+      `<input type='text' id='TextInputFieldUserPost-${randomid}' datadocid="${doc.id}" class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
+      "</div>" +
+      "</div>" +
+      "</div>" +
+      "</div>";
+
+    $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
+    const text = document.querySelector(`#TextInputFieldUserPost-${randomid}`);
+
+    text.addEventListener('keypress', (e) => addreply(e,randomid));
+
+
+    var card = document.createElement("div");
+    card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); 
+    card.setAttribute("id", "replycommentpost");
+    card.setAttribute("style", "margin-left: 13px;");
+   
+
+    var cardtitle = document.createElement("h5");
+    cardtitle.setAttribute("class", "mr-2");
+    cardtitle.setAttribute("id", "ReplyUsername");
+    card.appendChild(cardtitle);
+    var cardtitleDate = document.createElement("p");
+    cardtitleDate.setAttribute("id", "Replydatetimeshow");
+    card.appendChild(cardtitleDate);
+
+    var cardbody = document.createElement("div");
+    cardbody.setAttribute("class", "comment-text-sm");
+    cardbody.setAttribute("id", "ReplyCommentShow");
+    var cardbodycomment = document.createElement("p");
+    cardbodycomment.setAttribute("id", "postcomment");
+    cardbody.appendChild(cardbodycomment);
+  
+    for (var key in city.replies) {
+      const newreplylist =
+        `<div id="ReplyDiv-${randomid}" style="margin-left: 15%"; >` +
+        "<div class='d-flex flex-row align-items-center commented-user' >" +
+        "<h5 class='mr-2' id='username'>" +
+        city.replies[key].User + "</h5>" +
+        "<p id='datetimeshow'>" +
+        city.replies[key].Date + "</p>" +
+        "</div>" +
+        "<div class='comment-text-sm' id='Comment Sentence'>" + city.replies[key].Comment + "</div>" +
+        "<div class='reply-section' >" +
+        "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
+        "</div>" +
+        "</div>" +
+        "</div>";
+      $(".reply-section")[0].insertAdjacentHTML("afterend", newreplylist);
+
+    }
+  });
+}
+
+async function addreply(e,randomid) {
+  if (e.keyCode === 13) {
+    console.log(e);
+    console.log(`#TextInputFieldUserPost-${randomid}`);
+    const text = document.querySelector(`#TextInputFieldUserPost-${randomid}`).value;
+    const user = localStorage.getItem("googleUser");
+    const username = JSON.parse(user).displayName;
+    const datetime = formatDate(new Date());
+    console.log(text, username, datetime)
+    console.log(`${randomid}`)
+
+    const newreplylist =
+    `<div id='ReplyDiv-${randomid}' style='margin-left: 15%'; >` +
     "<div class='d-flex flex-row align-items-center commented-user' >" +
     "<h5 class='mr-2' id='username'>" +
-    city.username + "</h5>" +
+    username + "</h5>" +
     "<p id='datetimeshow'>" +
     datetime + "</p>" +
     "</div>" +
-    "<div class='comment-text-sm' id='Comment Sentence'>" + city.comment + "</div>" +
-    `<div class='reply-section' id='reply-section-${randomid}'> `+
+    "<div class='comment-text-sm' id='Comment Sentence'>" + text + "</div>" +
+    "<div class='reply-section' >" +
     "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
-    `<button class="btn btn-primary" id="buttonreply-${randomid}" type="button" onclick="replyspanhtml(this)" data-id="${randomid}" >Reply</button>` +
-    `<div class='d-flex flex-row add-comment-section mt-4 mb-4' id='replyandreply-${randomid}' style='visibility:hidden'  >` +
-    `<input type='text' id='TextInputFieldUserPost-${randomid}' class='form-control mr-md-4' placeholder='Press Enter to reply' >` +
-    "</div>" +
     "</div>" +
     "</div>" +
     "</div>";
-  $("#CommentCreate")[0].insertAdjacentHTML("afterbegin", newlist);
+    console.log(`.reply-section-${randomid}`)
+  $(`#reply-section-${randomid}`)[0].insertAdjacentHTML("afterend", newreplylist);
 
-  var card = document.createElement("div");
-  card.setAttribute("class", "d-flex flex-row align-items-center voting-icons"); // list
-  card.setAttribute("id", "replycommentpost");
-  card.setAttribute("style", "margin-left: 13px;");
-  //document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(card);
+  document.querySelector(`#TextInputFieldUserPost-${randomid}`).value = "";
 
-  var cardtitle = document.createElement("h5");
-  cardtitle.setAttribute("class", "mr-2");
-  cardtitle.setAttribute("id", "ReplyUsername");
-  card.appendChild(cardtitle);
-  var cardtitleDate = document.createElement("p");
-  cardtitleDate.setAttribute("id", "Replydatetimeshow");
-  card.appendChild(cardtitleDate);
+    const reply = { User: username, Date: datetime, Comment: text };
+    const docid = document.querySelector(`#TextInputFieldUserPost-${randomid}`).getAttribute("datadocid") // fwDThOEygpzmvQ9JSjFz 
+   
+    const docRef = doc(firestoreDB, "Comments", `${docid}`);
+   
+    // update data
+    const docSnap = await getDoc(docRef);
+    const data = docSnap.data();
+    console.log(data);
+    const replies = docSnap.data().replies;
 
-  var cardbody = document.createElement("div");
-  cardbody.setAttribute("class", "comment-text-sm");
-  cardbody.setAttribute("id", "ReplyCommentShow");
-  var cardbodycomment = document.createElement("p");
-  cardbodycomment.setAttribute("id", "postcomment");
-  cardbody.appendChild(cardbodycomment);
-  // document.querySelector(`#ReplyDiv-${buttonid}`).appendChild(cardbody);
-  
+    if (replies) {
+      replies.push(reply);
+      await updateDoc(docRef, {
+        replies: replies
+      });
+    } else {
+      await updateDoc(docRef, {
+        replies: [reply]
+      });
+    }
 
-  // $("#postcomment").innerHTML = city.replies[0].Comment;
-  // $("#Replydatetimeshow").innerHTML = city.replies[0].Date;
-  // $("#ReplyUsername").innerHTML = city.replies[0].User;
-
-  for(var key in city.replies){
-   //console.log(city.replies[key].User+', '+ city.replies[key].Date+', '+ city.replies[key].Comment);
-   const newreplylist =
-   `<div id="ReplyDiv-${randomid}" style="margin-left: 15%"; >` +
-   "<div class='d-flex flex-row align-items-center commented-user' >" +
-   "<h5 class='mr-2' id='username'>" +
-   city.replies[key].User + "</h5>" +
-   "<p id='datetimeshow'>" +
-   city.replies[key].Date + "</p>" +
-   "</div>" +
-   "<div class='comment-text-sm' id='Comment Sentence'>" + city.replies[key].Comment + "</div>" +
-   "<div class='reply-section' >" +
-   "<div class='d-flex flex-row align-items-center voting-icons' id='replycomment' >" +
-   "</div>" +
-   "</div>" +
-   "</div>";
-   $(".reply-section")[0].insertAdjacentHTML("afterend", newreplylist);
- 
   }
-});
 }
-
 
 // Create Data
 async function createFirestoreData(textid, targetText, comment, username, useruid) {
@@ -447,7 +483,7 @@ async function createFirestoreData(textid, targetText, comment, username, userui
   console.log("create comments success");
   return a;
 }
-// Read User Data
+// Read User Data Self collocation list
 async function readUserData(uid) {
   console.log(uid)
   const user = localStorage.getItem("googleUser");
