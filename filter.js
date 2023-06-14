@@ -81,7 +81,7 @@ export async function filterFirestoreDataFrequency(WordTypeFreq) {
     
   });
 }
-//filterFirestoreDataVN()
+
 // Filter data Verb+Noun
 export async function filterFirestoreDataVN() {
 
@@ -90,7 +90,7 @@ export async function filterFirestoreDataVN() {
   const querySnapshot1 = await getDocs(VN);
   //console.log("V+N how many document filter out: " + querySnapshot1.size); // how many document filter out
 
-  //document.querySelector("#containerdis").innerHTML = "";
+  document.querySelector("#containerdis").innerHTML = "";
   const allEventData = [];
   querySnapshot1.forEach((doc) => {
     var eventdata = doc.data();
