@@ -334,7 +334,7 @@ async function all(str) {
 
   const buttonid = $("#buttonreply").attr("data-id")
 
-  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str));
+  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str), orderBy("datetime"));
 
   const querySnapshot = await getDocs(ref);
 
