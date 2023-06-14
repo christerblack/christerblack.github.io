@@ -135,7 +135,6 @@ export async function realtimeupdatelike(str, count) {
     const like = doc.data().like
     document.getElementById('counterlike').innerText = like;
   });
-
 }
 
 //realtimeupdate dislike
@@ -148,7 +147,7 @@ export async function realtimeupdatedislike(str, count1) {
     const dislike = doc.data().dislike
     document.getElementById('counterdislike').innerText = dislike;
   });
-
+}
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -292,6 +291,7 @@ async function getreplycomment(e, docRef) {
     document.querySelector(`#TextInputFieldUserPost-${buttonid1}`).value = " ";
   }
 };
+
 all(str)
 async function all(str) {
 
@@ -397,9 +397,9 @@ async function addreply(e,randomid) {
     "</div>" +
     "</div>" +
     "</div>";
-  $(`#reply-section-${randomid}`)[0].insertAdjacentHTML("afterend", newreplylist);
+     $(`#reply-section-${randomid}`)[0].insertAdjacentHTML("afterend", newreplylist);
 
-  document.querySelector(`#TextInputFieldUserPost-${randomid}`).value = "";
+    document.querySelector(`#TextInputFieldUserPost-${randomid}`).value = "";
 
     const reply = { User: username, Date: datetime, Comment: text };
     const docid = document.querySelector(`#TextInputFieldUserPost-${randomid}`).getAttribute("datadocid") // fwDThOEygpzmvQ9JSjFz 
@@ -440,6 +440,7 @@ async function createFirestoreData(textid, targetText, comment, username, userui
   });
   return a;
 }
+
 // Read User Data Self collocation list
 async function readUserData(uid) {
  
@@ -448,6 +449,7 @@ async function readUserData(uid) {
   const q = query(collection(firestoreDB, "TargetText"), where("useruid", "==", usernameUid));
   const querySnapshot = await getDocs(q);
   // clear
+  
   document.querySelector("#listgroup").innerHTML = "";
   querySnapshot.forEach((doc) => {
 
