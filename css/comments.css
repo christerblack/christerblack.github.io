@@ -1,0 +1,107 @@
+body {
+    background-color: #eee;
+    
+}
+
+.bdge {
+  height: 21px;
+  background-color: orange;
+  color: #fff;
+  font-size: 11px;
+  padding: 8px;
+  border-radius: 4px;
+  line-height: 3px;
+}
+
+.comments {
+  text-decoration: underline;
+  text-underline-position: under;
+  cursor: pointer;
+}
+.Username  {
+  margin: 10px 150px 10px 10px !important;
+}
+.dot {
+  height: 7px;
+  width: 7px;
+  margin-top: 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hit-voting:hover {
+  color: blue;
+}
+
+#replyandreply{
+   width: auto;
+  /* border: 2px solid; */
+}
+
+.hit-voting {
+  cursor: pointer;
+}
+
+.card {
+  width: 50rem;
+  word-wrap: normal !important;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  row-gap: 50px;
+}
+
+button{
+  margin: 2px 2px;
+  cursor: pointer;
+  outline: 0;
+  color: #AAA;
+}
+.btn {
+  justify-content: flex-end;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.likes:hover {
+  color: green;
+}
+
+.dislikes:hover{
+  color: red;
+}
+
+/* button for like and disliked */
+.wrapper{
+  margin: 0 50px;
+  width: 50%;
+}
+
+.reply-section{
+  display: flex;
+}
+
+.likes{
+  height: 50px;
+  float: left;
+  width: 50px;
+}
+
+.dislikes{ 
+  height: 50px;
+  float: right;
+  width: 50px;
+}
+
+#l-counter{
+  float: left;
+}
+
+#d-counter{
+  float: right;
+}

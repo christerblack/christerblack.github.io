@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <title>Document</title>
+    <link rel="shortcut icon" href="#">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/comments.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="module" defer="defer" src="/init-firebase.js"></script>
+    <script type="module" async="async" src="/comment.js" crossorigin="anonymous"></script>
+    <script type="module" async="async" src="/crud.js" crossorigin="anonymous"></script>
+    <script type="module" async="async" src="/filter.js" crossorigin="anonymous"></script>
+</head>
+
+
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="d-flex flex-column col-md-8">
+                <div class="d-flex flex-row align-items-center text-left comment-top p-2 bg-white border-bottom px-4">
+
+                    <div class="card" id="card-container">
+                        <div class="card-header">
+                            <h5 class="Username" id="username">Username: </h5>
+                            <div class="likes-counter">
+                                <button class="likes" id="like" onclick="liked(event)"><i class="fa fa-thumbs-up fa-lg"
+                                        aria-hidden="true"></i></button>
+                                <div>
+                                    <span>Like:</span>
+                                    <span id="counterlike">0</span>
+                                </div>
+                            </div>
+                            <div class="dislikes-counter" style="margin: auto;">
+                                <button class="dislikes" id="dislike" onclick="disliked(event)"><i
+                                        class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+                                <div>
+                                    <span>Dislike:</span>
+                                    <span id="counterdislike">0</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="TargetText" id="targertext">Target Text: </p>
+                            <p class="Example Sentence" id="examplesentence">Example Sentence: </p>
+                            <p class="Example Sentence" id="originsentence">Origin Sentence: </p>
+                            <h5 class="card-title"></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="coment-bottom bg-white p-2 px-4">
+                    <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+
+                        <input type="text" id="TextInputField" class="form-control mr-3" placeholder="Add comment" />
+
+                        <button class="btn btn-primary" id="comment" type="button">Comment</button>
+                    </div>
+
+                    <div class="commented-section mt-2" id="CommentCreate">
+                     
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+
+        function homeInit() {
+            const credential = localStorage.getItem("googleCredential");
+            const token = localStorage.getItem("googleToken");
+            const user = localStorage.getItem("googleUser");
+
+            //document.querySelector("#googleCredential").textContent = JSON.stringify(JSON.parse(credential), undefined, 4);
+            //document.querySelector("#googleToken").textContent = token;
+            //document.querySelector("#googleUser").textContent = JSON.stringify(JSON.parse(user), undefined, 4);
+            //document.querySelector("#googleUserName").textContent = JSON.parse(user).displayName;
+        }
+
+        window.onload = () => {
+            homeInit();
+        };
+    </script>
+</body>
+
+</html>
