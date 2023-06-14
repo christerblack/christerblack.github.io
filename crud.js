@@ -18,6 +18,28 @@ import { app } from "/firebaseConfig.js";
 
 const firestoreDB = getFirestore(app);
 
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date) {
+  return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-') +
+    ' ' +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(':')
+  );
+}
+
+
 // Create Data
 async function createFirestoreData(target_text) {
   // const citiesRef = collection(firestoreDB, "users");
@@ -105,6 +127,12 @@ async function readFirestoreData(TargetWord) {
     const type = `${doc.data().type}`;
     const target = `${doc.data().targetText}`;
     const example = `${doc.data().ExampleSentence}`;
+    const origin = `${doc.data().originText}`;
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
+    const datetime12 =  formatDate(new Date(doc.data().datetime.seconds * 1000));
     //const filterResultObj = { username, example };
     var card = document.createElement("div");
     card.setAttribute("class", "card bg-light border-dark mb-3");
@@ -127,15 +155,31 @@ async function readFirestoreData(TargetWord) {
     var userName = document.createElement("h5");
     var targettext = document.createElement("p");
     var exampleSentence = document.createElement("p");
+    var originSentence = document.createElement("p");
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
+
     userName.innerHTML = "Username: " + username;
     targettext.innerHTML = "TargetText: " + target;
     exampleSentence.innerHTML = "Example Sentence: " + example; // added this
+    originSentence.innerHTML = "Origin Sentence: " + origin;
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime12;
 
     card.appendChild(cardheader);
     card.appendChild(cardbody);
     cardheader.appendChild(userName);
     cardbody.appendChild(targettext);
     cardbody.appendChild(exampleSentence);
+    cardbody.appendChild(originSentence);
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
     //console.log(eventdata);
     //console.log(filterResultObj);
     card.addEventListener("click", () => {
