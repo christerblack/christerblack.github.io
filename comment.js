@@ -1,4 +1,4 @@
-import { collection, addDoc, setDoc, onSnapshot, getDocs, updateDoc, getDoc, getFirestore, doc, query, where } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
+import { collection, addDoc, orderBy, setDoc, onSnapshot, getDocs, updateDoc, getDoc, getFirestore, doc, query, where } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js";
 
 import { app } from "/firebaseConfig.js";
 import { readFirestoreData } from "./crud.js";
@@ -334,7 +334,7 @@ async function all(str) {
 
   const buttonid = $("#buttonreply").attr("data-id")
 
-  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str));
+  const ref = query(collection(firestoreDB, "Comments"), where("targettextid", "==", str),orderBy("datetime"));
 
   const querySnapshot = await getDocs(ref);
 
