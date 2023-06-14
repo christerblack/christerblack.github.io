@@ -5,6 +5,23 @@ import { readFirestoreData } from "./crud.js";
 
 const firestoreDB = getFirestore(app);
 
+
+function formatDate(date) {
+  return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-') +
+    ' ' +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(':')
+  );
+}
+
 // Filter data username
 export async function filterFirestoreDataUser() {
   var DATAATTR = dropdownWordType.getAttribute("dataAttr"); //getter
@@ -27,6 +44,7 @@ export async function filterFirestoreDataUser() {
     const dislike = `${doc.data().dislike}`;
     const translate = `${doc.data().translate}`;
     const datetime = `${doc.data().datetime}`;
+    const datetime12 = formatDate(datetime);
     
     var card = document.createElement("div");
     card.setAttribute("class", "card bg-light border-dark mb-3");
@@ -61,7 +79,7 @@ export async function filterFirestoreDataUser() {
     translate1.innerHTML = "Translate: " + translate;
     like1.innerHTML = "Like: " + like;
     dislike1.innerHTML = "Dislike: " + dislike;
-    datetime1.innerHTML = "Date: " + datetime;
+    datetime1.innerHTML = "Date: " + datetime12;
 
     card.appendChild(cardheader);
     card.appendChild(cardbody);
@@ -144,6 +162,7 @@ export async function filterFirestoreDataVN() {
     const dislike = `${doc.data().dislike}`;
     const translate = `${doc.data().translate}`;
     const datetime = `${doc.data().datetime}`;
+    const datetime12 = formatDate(datetime);
     var like1 = document.createElement("p");
     var dislike1 = document.createElement("p");
     var translate1 = document.createElement("p");
@@ -151,7 +170,7 @@ export async function filterFirestoreDataVN() {
     translate1.innerHTML = "Translate: " + translate;
     like1.innerHTML = "Like: " + like;
     dislike1.innerHTML = "Dislike: " + dislike;
-    datetime1.innerHTML = "Date: " + datetime;
+    datetime1.innerHTML = "Date: " + datetime12;
     cardbody.appendChild(translate1);
     cardbody.appendChild(like1);
     cardbody.appendChild(dislike1);
@@ -236,6 +255,7 @@ export async function filterFirestoreDataVPrep() {
     const dislike = `${doc.data().dislike}`;
     const translate = `${doc.data().translate}`;
     const datetime = `${doc.data().datetime}`;
+    const datetime12 = formatDate(datetime);
     var like1 = document.createElement("p");
     var dislike1 = document.createElement("p");
     var translate1 = document.createElement("p");
@@ -243,7 +263,7 @@ export async function filterFirestoreDataVPrep() {
     translate1.innerHTML = "Translate: " + translate;
     like1.innerHTML = "Like: " + like;
     dislike1.innerHTML = "Dislike: " + dislike;
-    datetime1.innerHTML = "Date: " + datetime;
+    datetime1.innerHTML = "Date: " + datetime12;
     cardbody.appendChild(translate1);
     cardbody.appendChild(like1);
     cardbody.appendChild(dislike1);
@@ -321,6 +341,7 @@ export async function filterFirestoreDataVAdv() {
     const dislike = `${doc.data().dislike}`;
     const translate = `${doc.data().translate}`;
     const datetime = `${doc.data().datetime}`;
+    const datetime12 = formatDate(datetime);
     var like1 = document.createElement("p");
     var dislike1 = document.createElement("p");
     var translate1 = document.createElement("p");
@@ -328,7 +349,7 @@ export async function filterFirestoreDataVAdv() {
     translate1.innerHTML = "Translate: " + translate;
     like1.innerHTML = "Like: " + like;
     dislike1.innerHTML = "Dislike: " + dislike;
-    datetime1.innerHTML = "Date: " + datetime;
+    datetime1.innerHTML = "Date: " + datetime12;
     cardbody.appendChild(translate1);
     cardbody.appendChild(like1);
     cardbody.appendChild(dislike1);
