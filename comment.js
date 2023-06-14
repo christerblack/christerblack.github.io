@@ -10,7 +10,7 @@ var url_string = window.location.href;
 var url = new URL(url_string);
 var str = url.search;
 str = str.slice(14);
-//console.log(str);  // text id 
+
 filterFirestoreDataUser(str);
 
 
@@ -20,13 +20,6 @@ export async function filterFirestoreDataUser(str) {
   const citiesRef = collection(firestoreDB, "TargetText");
  
   const querySnapshot = await getDoc(doc(firestoreDB, "TargetText", `${textid}`));
-
-  if (querySnapshot.exists()) {
-    // console.log(querySnapshot.data())
-  }
-  else {
-    console.log("No such document")
-  }
 
   // clear
   const username = querySnapshot.data().name;
@@ -72,8 +65,6 @@ function liked(event) {
     }
   }
 
-  console.log('the button ' + 'like' + ' was pressed' + like);
-
   updateFirestoreDatalike(str, like)
   realtimeupdatelike(str, like)
 
@@ -99,7 +90,6 @@ function disliked(event) {
     }
   }
 
-  console.log('the button ' + 'dislike' + ' was pressed' + dislike);
   realtimeupdatedislike(str, dislike)
   updateFirestoreDatadislike(str, dislike)
 
@@ -120,9 +110,6 @@ export async function updateFirestoreDatalike(str, count) {
     commentliketimestamp: new Date().getTime(),
     commentdate: new Date(),
   })
-
-  console.log("update finished");
-
 }
 
 //updateFirestoreData dislike
@@ -137,9 +124,6 @@ export async function updateFirestoreDatadislike(str, count1) {
     commentdisliketimestamp: new Date().getTime(),
     commentdate: new Date(),
   })
-
-  console.log("update finished");
-
 }
 
 //realtimeupdate like
@@ -149,32 +133,22 @@ export async function realtimeupdatelike(str, count) {
 
   onSnapshot(doc(firestoreDB, "TargetText", textid), (doc) => {
     const like = doc.data().like
-    console.log("Current data: ", doc.data().like, doc.data().dislike);
-    const totallike = Number(Number(like) + Number(countlike))
-    console.log("Total like: " + totallike)
-
-
     document.getElementById('counterlike').innerText = like;
   });
 
-  console.log("realtime update finished");
 }
 
 //realtimeupdate dislike
 export async function realtimeupdatedislike(str, count1) {
   const textid = str;
   const dislikecount = count1
-  console.log(dislikecount)
+ 
 
   onSnapshot(doc(firestoreDB, "TargetText", textid), (doc) => {
-    console.log("Current data: ", doc.data().like, doc.data().dislike);
     const dislike = doc.data().dislike
-
-
     document.getElementById('counterdislike').innerText = dislike;
   });
-  console.log("realtime update finished");
-}
+
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -240,36 +214,27 @@ async function getcomment() {
   replyDiv.style = "margin-left: 15%";
   $(`#${randomid}`)[0].appendChild(replyDiv);
 
-
   const docRef = await createFirestoreData(str, strsplit[1], textinput, username, usernameUid);
-  console.log(docRef.id);
-
   const text = document.querySelector(`#TextInputFieldUserPost-${randomid}`);
   text.addEventListener('keypress', (e) => getreplycomment(e, docRef));
-
-  console.log("Create Finish")
 
 }
 
 //document.getElementById("buttonreply")?.addEventListener("click", replyspanhtml(e));
 function replyspanhtml(e) {
-  //console.log(e, e.dataid)
+  
   const buttonid = e.getAttribute('data-id');
-  console.log(buttonid);  // 
   $(`#replyandreply-${buttonid}`).removeAttr('style');
   $('#TextInputFieldUserPost').data('data-id', buttonid); //setter
-
-  console.log("work!")
 }
 
 // reply comment of user comment 
 async function getreplycomment(e, docRef) {
-  console.log(docRef)
-  console.log(e, e.target.dataset.id)
+
   let buttonid1 = e.target.dataset.id;
-  console.log(typeof (buttonid1));
+ 
   $('#TextInputFieldUserPost').data('data-id', buttonid1); //setter
-  console.log(e.keyCode);
+ 
   if (e.keyCode === 13) {
     const textinput = document.querySelector(`#TextInputFieldUserPost-${buttonid1}`).value;
     const user = localStorage.getItem("googleUser");
@@ -324,10 +289,7 @@ async function getreplycomment(e, docRef) {
         replies: [reply]
       });
     }
-
-
     document.querySelector(`#TextInputFieldUserPost-${buttonid1}`).value = " ";
-    console.log("work!")
   }
 };
 all(str)
@@ -415,14 +377,11 @@ async function all(str) {
 
 async function addreply(e,randomid) {
   if (e.keyCode === 13) {
-    console.log(e);
-    console.log(`#TextInputFieldUserPost-${randomid}`);
+
     const text = document.querySelector(`#TextInputFieldUserPost-${randomid}`).value;
     const user = localStorage.getItem("googleUser");
     const username = JSON.parse(user).displayName;
     const datetime = formatDate(new Date());
-    console.log(text, username, datetime)
-    console.log(`${randomid}`)
 
     const newreplylist =
     `<div id='ReplyDiv-${randomid}' style='margin-left: 15%'; >` +
@@ -438,7 +397,6 @@ async function addreply(e,randomid) {
     "</div>" +
     "</div>" +
     "</div>";
-    console.log(`.reply-section-${randomid}`)
   $(`#reply-section-${randomid}`)[0].insertAdjacentHTML("afterend", newreplylist);
 
   document.querySelector(`#TextInputFieldUserPost-${randomid}`).value = "";
@@ -451,7 +409,7 @@ async function addreply(e,randomid) {
     // update data
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
-    console.log(data);
+  
     const replies = docSnap.data().replies;
 
     if (replies) {
@@ -470,9 +428,7 @@ async function addreply(e,randomid) {
 
 // Create Data
 async function createFirestoreData(textid, targetText, comment, username, useruid) {
-  console.log(textid, comment, username, useruid)
-  // const citiesRef = collection(firestoreDB, "Comments");
-
+  
   const a = await addDoc(collection(firestoreDB, "Comments"), {
     useruid: useruid,
     targettextid: textid,
@@ -482,18 +438,16 @@ async function createFirestoreData(textid, targetText, comment, username, userui
     timestamp: new Date().getTime(),
     datetime: new Date(),
   });
-  console.log("create comments success");
   return a;
 }
 // Read User Data Self collocation list
 async function readUserData(uid) {
-  console.log(uid)
+ 
   const user = localStorage.getItem("googleUser");
   const usernameUid = uid //JSON.parse(user).uid;
   const q = query(collection(firestoreDB, "TargetText"), where("useruid", "==", usernameUid));
   const querySnapshot = await getDocs(q);
   // clear
-  console.log("All firestore order by username how many document filter out: " + querySnapshot.size);
   document.querySelector("#listgroup").innerHTML = "";
   querySnapshot.forEach((doc) => {
 
