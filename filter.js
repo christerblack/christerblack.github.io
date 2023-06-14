@@ -147,7 +147,7 @@ export async function filterFirestoreDataVN() {
     card.classList.add("text");
   });
 }
-filterFirestoreDataVN()
+//filterFirestoreDataVN()
 
 
 // Filter data Verb+Prep
