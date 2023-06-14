@@ -23,6 +23,10 @@ export async function filterFirestoreDataUser() {
     const target = `${doc.data().targetText}`;
     const example = `${doc.data().ExampleSentence}`;
     const origin = `${doc.data().originText}`;
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
     
     var card = document.createElement("div");
     card.setAttribute("class", "card bg-light border-dark mb-3");
@@ -46,10 +50,18 @@ export async function filterFirestoreDataUser() {
     var targettext = document.createElement("p");
     var exampleSentence = document.createElement("p");
     var originSentence = document.createElement("p");
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
     userName.innerHTML = "Username: " + username;
     targettext.innerHTML = "TargetText: " + target;
     exampleSentence.innerHTML = "Example Sentence: " + example; // added this
     originSentence.innerHTML = "Origin Sentence: " + origin;
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime;
 
     card.appendChild(cardheader);
     card.appendChild(cardbody);
@@ -57,6 +69,10 @@ export async function filterFirestoreDataUser() {
     cardbody.appendChild(targettext);
     cardbody.appendChild(exampleSentence);
     cardbody.appendChild(originSentence);
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
    
     card.addEventListener("click", () => {
       window.location.assign("Comments.html" + "?targetTextId=" + doc.id);
@@ -124,6 +140,25 @@ export async function filterFirestoreDataVN() {
     var exampleSentence = document.createElement("p");
     var originSentence = document.createElement("p");
 
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime;
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
+
+
+
     userName.innerHTML = "Username: " + username;
     userName.addEventListener("click", () => {
       // clear container
@@ -133,13 +168,16 @@ export async function filterFirestoreDataVN() {
     targettext.innerHTML = "TargetText: " + target;
     exampleSentence.innerHTML = "Example Sentence: " + example; // added this
     originSentence.innerHTML = "Origin Sentence: " + origin;
-
+    
     card.appendChild(cardheader);
     card.appendChild(cardbody);
     cardheader.appendChild(userName);
     cardbody.appendChild(targettext);
     cardbody.appendChild(exampleSentence);
     cardbody.appendChild(originSentence);
+   
+
+
 
     card.addEventListener("click", () => {
       window.location.assign("Comments.html" + "?targetTextId=" + doc.id);
@@ -193,6 +231,25 @@ export async function filterFirestoreDataVPrep() {
     var targettext = document.createElement("p");
     var exampleSentence = document.createElement("p");
     var originSentence = document.createElement("p");
+
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime;
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
+
+
     userName.innerHTML = "Username: " + username;
     userName.addEventListener("click", () => {
       // clear container
@@ -259,6 +316,23 @@ export async function filterFirestoreDataVAdv() {
     var targettext = document.createElement("p");
     var exampleSentence = document.createElement("p");
     var originSentence = document.createElement("p");
+
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime;
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
 
     userName.innerHTML = "Username: " + username;
     userName.addEventListener("click", () => {
@@ -344,8 +418,7 @@ sortVPrepFrequency?.addEventListener("click", () => {
 });
 
 export async function Sortbytargettext() {
-  //console.log(type);
-  //const wordtype = WordTypeFreq;
+ 
   const citiesRef = collection(firestoreDB, "TargetText");
   const qCondition = query(citiesRef, orderBy("targetText"));
   const querySnapshot = await getDocs(qCondition);
