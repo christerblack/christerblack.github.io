@@ -12,7 +12,7 @@ var str = url.search;
 str = str.slice(14);
 //console.log(str);  // text id 
 filterFirestoreDataUser(str);
-//updateFirestoreData(str)
+
 
 export async function filterFirestoreDataUser(str) {
   const textid = str;
@@ -34,7 +34,6 @@ export async function filterFirestoreDataUser(str) {
   const example = querySnapshot.data().ExampleSentence;
   const origin = querySnapshot.data().originText;
   const translate = querySnapshot.data().translate;
-  console.log(translate, querySnapshot.data().translate);
   const like = querySnapshot.data().like;
   const dislike = querySnapshot.data().dislike;
 
