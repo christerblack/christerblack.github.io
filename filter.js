@@ -81,7 +81,7 @@ export async function filterFirestoreDataFrequency(WordTypeFreq) {
     
   });
 }
-filterFirestoreDataVN()
+//filterFirestoreDataVN()
 // Filter data Verb+Noun
 export async function filterFirestoreDataVN() {
 
