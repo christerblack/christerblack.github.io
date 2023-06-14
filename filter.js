@@ -81,16 +81,16 @@ export async function filterFirestoreDataFrequency(WordTypeFreq) {
     
   });
 }
-
+filterFirestoreDataVN()
 // Filter data Verb+Noun
 export async function filterFirestoreDataVN() {
 
   const citiesRef = collection(firestoreDB, "TargetText");
   const VN = query(citiesRef, where("type", "==", "Verb + Noun"));
   const querySnapshot1 = await getDocs(VN);
-  console.log("V+N how many document filter out: " + querySnapshot1.size); // how many document filter out
+  //console.log("V+N how many document filter out: " + querySnapshot1.size); // how many document filter out
 
-
+  //document.querySelector("#containerdis").innerHTML = "";
   const allEventData = [];
   querySnapshot1.forEach((doc) => {
     var eventdata = doc.data();
@@ -105,7 +105,7 @@ export async function filterFirestoreDataVN() {
     card.setAttribute("class", "card bg-light mb-3");
     card.setAttribute("id", "card-container");
     card.setAttribute("style", "max-width: 70rem;");
-    document.querySelector("#containerdis").appendChild(card);
+    document.getElementById("containerdis").appendChild(card);
 
     var cardheader = document.createElement("div");
     cardheader.setAttribute("class", "card-header");
@@ -147,7 +147,7 @@ export async function filterFirestoreDataVN() {
     card.classList.add("text");
   });
 }
-//filterFirestoreDataVN()
+
 
 
 // Filter data Verb+Prep
