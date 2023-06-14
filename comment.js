@@ -42,7 +42,7 @@ export async function filterFirestoreDataUser(str) {
   document.querySelector("#targertext").innerHTML += target;
   document.querySelector("#examplesentence").innerHTML += example;
   document.querySelector("#originsentence").innerHTML += origin;
-  document.querySelector("#originsentence").innerHTML += translate;
+  document.querySelector("#translate").innerHTML += translate;
   document.getElementById('counterdislike').innerHTML = dislike;
   document.getElementById('counterlike').innerHTML = like;
 
