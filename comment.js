@@ -33,6 +33,7 @@ export async function filterFirestoreDataUser(str) {
   const target = querySnapshot.data().targetText;
   const example = querySnapshot.data().ExampleSentence;
   const origin = querySnapshot.data().originText;
+  const translate = querySnapshot.data().translate;
   const like = querySnapshot.data().like;
   const dislike = querySnapshot.data().dislike;
 
@@ -41,6 +42,7 @@ export async function filterFirestoreDataUser(str) {
   document.querySelector("#targertext").innerHTML += target;
   document.querySelector("#examplesentence").innerHTML += example;
   document.querySelector("#originsentence").innerHTML += origin;
+  document.querySelector("#originsentence").innerHTML += translate;
   document.getElementById('counterdislike').innerHTML = dislike;
   document.getElementById('counterlike').innerHTML = like;
 
