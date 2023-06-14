@@ -105,7 +105,8 @@ export async function filterFirestoreDataVN() {
     card.setAttribute("class", "card bg-light mb-3");
     card.setAttribute("id", "card-container");
     card.setAttribute("style", "max-width: 70rem;");
-    document.getElementById("containerdis").appendChild(card);
+    const container = document.getElementById("containerdis")
+    container.appendChild(card);
 
     var cardheader = document.createElement("div");
     cardheader.setAttribute("class", "card-header");
