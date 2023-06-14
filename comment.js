@@ -13,7 +13,6 @@ str = str.slice(14);
 
 filterFirestoreDataUser(str);
 
-
 export async function filterFirestoreDataUser(str) {
   const textid = str;
 
@@ -141,7 +140,6 @@ export async function realtimeupdatelike(str, count) {
 export async function realtimeupdatedislike(str, count1) {
   const textid = str;
   const dislikecount = count1
- 
 
   onSnapshot(doc(firestoreDB, "TargetText", textid), (doc) => {
     const dislike = doc.data().dislike
