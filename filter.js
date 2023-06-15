@@ -104,6 +104,159 @@ export async function filterFirestoreDataUser() {
 
 }
 
+// Filter data sort like
+export async function filterFirestoreDataSortlike() {
+  var DATAATTR = dropdownWordType.getAttribute("dataAttr"); //getter
+  var wordType = where("type", "==", DATAATTR);
+  const citiesRef = collection(firestoreDB, "TargetText");
+ 
+  const qCondition = query(citiesRef, wordType, orderBy("like","desc"));
+  const querySnapshot = await getDocs(qCondition);  
+  // clear
+  document.querySelector("#containerdis").innerHTML = "";
+  querySnapshot.forEach((doc) => {
+    var eventdata = doc.data();
+    const username = `${doc.data().name}`;
+    const type = `${doc.data().type}`;
+    const target = `${doc.data().targetText}`;
+    const example = `${doc.data().ExampleSentence}`;
+    const origin = `${doc.data().originText}`;
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
+    const datetime12 = formatDate(new Date(doc.data().datetime.seconds * 1000));
+   
+    var card = document.createElement("div");
+    card.setAttribute("class", "card bg-light border-dark mb-3");
+    card.setAttribute("id", "card-container");
+    card.setAttribute("style", "max-width: 70rem;");
+    document.querySelector("#containerdis").appendChild(card);
+
+    var cardheader = document.createElement("div");
+    cardheader.setAttribute("class", "card-header");
+    card.appendChild(cardheader);
+
+    var cardbody = document.createElement("div");
+    cardbody.setAttribute("class", "card-body");
+    card.appendChild(cardbody);
+
+    var cardtitle = document.createElement("h5");
+    cardtitle.setAttribute("class", "card-title");
+    document.querySelector(".card-body").appendChild(cardtitle);
+
+    var userName = document.createElement("h5");
+    var targettext = document.createElement("p");
+    var exampleSentence = document.createElement("p");
+    var originSentence = document.createElement("p");
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
+    userName.innerHTML = "Username: " + username;
+    targettext.innerHTML = "TargetText: " + target;
+    exampleSentence.innerHTML = "Example Sentence: " + example; // added this
+    originSentence.innerHTML = "Origin Sentence: " + origin;
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime12;
+
+    card.appendChild(cardheader);
+    card.appendChild(cardbody);
+    cardheader.appendChild(userName);
+    cardbody.appendChild(targettext);
+    cardbody.appendChild(exampleSentence);
+    cardbody.appendChild(originSentence);
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
+   
+    card.addEventListener("click", () => {
+      window.location.assign("Comments.html" + "?targetTextId=" + doc.id);
+    });
+    card.classList.add("text");
+  });
+}
+
+// Filter data sort like
+export async function filterFirestoreDataSortdislike() {
+  var DATAATTR = dropdownWordType.getAttribute("dataAttr"); //getter
+  var wordType = where("type", "==", DATAATTR);
+  const citiesRef = collection(firestoreDB, "TargetText");
+ 
+  const qCondition = query(citiesRef, wordType, orderBy("dislike","desc"));
+  const querySnapshot = await getDocs(qCondition);  
+  // clear
+  document.querySelector("#containerdis").innerHTML = "";
+  querySnapshot.forEach((doc) => {
+    var eventdata = doc.data();
+    const username = `${doc.data().name}`;
+    const type = `${doc.data().type}`;
+    const target = `${doc.data().targetText}`;
+    const example = `${doc.data().ExampleSentence}`;
+    const origin = `${doc.data().originText}`;
+    const like = `${doc.data().like}`;
+    const dislike = `${doc.data().dislike}`;
+    const translate = `${doc.data().translate}`;
+    const datetime = `${doc.data().datetime}`;
+    const datetime12 = formatDate(new Date(doc.data().datetime.seconds * 1000));
+   
+    var card = document.createElement("div");
+    card.setAttribute("class", "card bg-light border-dark mb-3");
+    card.setAttribute("id", "card-container");
+    card.setAttribute("style", "max-width: 70rem;");
+    document.querySelector("#containerdis").appendChild(card);
+
+    var cardheader = document.createElement("div");
+    cardheader.setAttribute("class", "card-header");
+    card.appendChild(cardheader);
+
+    var cardbody = document.createElement("div");
+    cardbody.setAttribute("class", "card-body");
+    card.appendChild(cardbody);
+
+    var cardtitle = document.createElement("h5");
+    cardtitle.setAttribute("class", "card-title");
+    document.querySelector(".card-body").appendChild(cardtitle);
+
+    var userName = document.createElement("h5");
+    var targettext = document.createElement("p");
+    var exampleSentence = document.createElement("p");
+    var originSentence = document.createElement("p");
+    var like1 = document.createElement("p");
+    var dislike1 = document.createElement("p");
+    var translate1 = document.createElement("p");
+    var datetime1 = document.createElement("p");
+    userName.innerHTML = "Username: " + username;
+    targettext.innerHTML = "TargetText: " + target;
+    exampleSentence.innerHTML = "Example Sentence: " + example; // added this
+    originSentence.innerHTML = "Origin Sentence: " + origin;
+    translate1.innerHTML = "Translate: " + translate;
+    like1.innerHTML = "Like: " + like;
+    dislike1.innerHTML = "Dislike: " + dislike;
+    datetime1.innerHTML = "Date: " + datetime12;
+
+    card.appendChild(cardheader);
+    card.appendChild(cardbody);
+    cardheader.appendChild(userName);
+    cardbody.appendChild(targettext);
+    cardbody.appendChild(exampleSentence);
+    cardbody.appendChild(originSentence);
+    cardbody.appendChild(translate1);
+    cardbody.appendChild(like1);
+    cardbody.appendChild(dislike1);
+    cardbody.appendChild(datetime1);
+   
+    card.addEventListener("click", () => {
+      window.location.assign("Comments.html" + "?targetTextId=" + doc.id);
+    });
+    card.classList.add("text");
+  });
+}
+
+
 // Filter data frequency
 export async function filterFirestoreDataFrequency(WordTypeFreq) {
   const wordtype = WordTypeFreq;
@@ -216,6 +369,8 @@ export async function filterFirestoreDataVN() {
     card.classList.add("text");
   });
 }
+
+
 
 
 
@@ -432,6 +587,28 @@ sortUser?.addEventListener("click", () => {
   const attribute = "Verb + Noun"
   $("#dropdownWordType").data('dataAttr',attribute); //setter
   filterFirestoreDataUser();  // default sorting username is V+N
+ 
+});
+
+// //only sort like
+const sortlike = document.querySelector('[data-link="sortLike"]');
+
+sortlike?.addEventListener("click", () => {
+  document.querySelector("#containerdis").innerHTML = "";
+  const attribute = "Verb + Noun"
+  $("#dropdownWordType").data('dataAttr',attribute); //setter
+  filterFirestoreDataSortlike();  // default sorting username is V+N
+ 
+});
+
+// //only sort dislike
+const sortdislike = document.querySelector('[data-link="sortDislike"]');
+
+sortdislike?.addEventListener("click", () => {
+  document.querySelector("#containerdis").innerHTML = "";
+  const attribute = "Verb + Noun"
+  $("#dropdownWordType").data('dataAttr',attribute); //setter
+  filterFirestoreDataSortdislike();  // default sorting username is V+N
  
 });
 
